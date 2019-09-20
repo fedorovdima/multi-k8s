@@ -9,9 +9,29 @@ metadata:
     nginx.ingress.kubernetes.io/enable-rewrite-log: "true"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       rewrite (?i)/api/?(.*)$ /$1 break;
+    certmanager.k8s.io/cluster-issuer: 'letsencrypt-prod'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
 spec:
+  tls:
+    - hosts:
+        - ciklum-devops8953.pp.ua
+        - www.ciklum-devops8953.pp.ua
+      secretName: ciklum-devops8953-pp-ua
+
   rules:
-    - http:
+    - host: ciklum-devop8953.pp.ua
+      http:
+        paths:
+          - path: /?(.*)
+            backend:
+              serviceName: client-cluster-ip-service
+              servicePort: 3000
+          - path: /api/?(.*)
+            backend:
+              serviceName: server-cluster-ip-service
+              servicePort: 5000
+    - host: www.ciklum-devop8953.pp.ua
+      http:
         paths:
           - path: /?(.*)
             backend:

@@ -19,7 +19,7 @@ spec:
       secretName: ciklum-devops8953-pp-ua
 
   rules:
-    - host: ciklum-devop8953.pp.ua
+    - host: ciklum-devops8953.pp.ua
       http:
         paths:
           - path: /?(.*)
@@ -30,7 +30,7 @@ spec:
             backend:
               serviceName: server-cluster-ip-service
               servicePort: 5000
-    - host: www.ciklum-devop8953.pp.ua
+    - host: www.ciklum-devops8953.pp.ua
       http:
         paths:
           - path: /?(.*)
